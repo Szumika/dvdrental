@@ -1,5 +1,7 @@
 package com.example.start.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -8,12 +10,13 @@ import java.util.List;
 @Entity
 public class Actor {
     @Id
-    public long actor_id;
+    public Long actor_id;
     public String firstName;
     public String lastName;
 //    @OneToMany(mappedBy = "actor")
 //    Set<filmActor> ActorsInFilm;
     @ManyToMany(mappedBy = "actors")
+    @JsonBackReference
     private List<Film> films;
 
     public List<Film> getFilms() {

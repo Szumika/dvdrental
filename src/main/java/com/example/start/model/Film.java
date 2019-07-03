@@ -1,5 +1,7 @@
 package com.example.start.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
@@ -11,12 +13,12 @@ public class Film {
     public String title;
     public String description;
 //    public Date releaseYear;
-
     @ManyToMany
             @JoinTable(
             name = "film_actor",
             joinColumns = @JoinColumn(name = "filmId"),
             inverseJoinColumns = @JoinColumn(name = "actorId"))
+    @JsonManagedReference
     public List<Actor> actors;
 //@OneToMany(mappedBy = "film")
 //    Set<filmActor> ActorsInFilm;
@@ -25,6 +27,7 @@ public class Film {
             name = "film_category",
             joinColumns = @JoinColumn(name = "filmId"),
             inverseJoinColumns = @JoinColumn(name = "categoryId"))
+    @JsonManagedReference
     public List<Category> filmCategory;
 
     public Film(Long filmId, String title, String description, Date releaseYear, List<Actor> actors, List<Category> filmCategory) {
